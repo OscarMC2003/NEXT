@@ -41,7 +41,7 @@ export default function Resgistro() {
 
 
     return (
-        <section className="bg-[#4586ef]">
+        <section className="flex justify-center items-center h-screen bg-[#789fdf]">
             <div className="w-full bg-blue rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                 <p className="text-white">Regístrar comercio</p>
@@ -65,7 +65,6 @@ export default function Resgistro() {
                     </form>
                 </div>
             </div>
-
         </section>
     )
 }
