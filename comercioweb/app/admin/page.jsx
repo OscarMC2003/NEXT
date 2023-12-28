@@ -1,3 +1,5 @@
+"use client"
+
 import RegistroComercios from '@/components/registroComercios'
 import { v4 as uuidv4 } from 'uuid';
 
@@ -7,6 +9,19 @@ async function getUsers() {
   console.log(data.users)
   return data.users
 }
+
+const handleDeleteUser = async (userId) => {
+  alert("entro en eliminar comercio")
+  fetch("/api/regisComer", {
+    method: "DELETE",
+    headers: {
+    //Authorization: `Bearer ${tokenJWT}`
+    'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userId)
+})
+};
+
 
 export default async function Admin() {
 
@@ -21,6 +36,7 @@ export default async function Admin() {
             {users.map((user) => (
                 <li key={uuidv4()} className="bg-slate-400 mb-2 p-4 rounded-md text-back flex justify-between">
                         <h5 className="font-bold">{user.name}</h5>
+                        <button onClick={() => handleDeleteUser(user)}>Eliminar</button>
                 </li>
             ))}
         </ul>

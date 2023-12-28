@@ -1,1 +1,1 @@
-[{"email":"pepito@prueba.com","password":"1221"}]
+[{"email":"pepito@prueba.com","password":"1221"},{"email":"omarcosconde@gmail.com","password":"123456","name":"prueba3","year":"20","city":"Madrid","interest":"que funcione"}]
