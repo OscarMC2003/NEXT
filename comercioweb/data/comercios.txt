@@ -1,1 +1,1 @@
-[{"email":"omarcosconde@gmail.com","CIF":"1234","address":"Calle Cirilo Martínez Novillo","name":"Oscar Marcos Conde","phone":"603482394"}]
+[{"email":"omarcosconde@gmail.com","CIF":"1234","address":"Calle Cirilo Martínez Novillo","name":"Oscar Marcos Conde","phone":"603482394"},{"email":"omarcosconde@gmail.com","CIF":"777","address":"Calle Cirilo Martínez Novillo","name":"OMC 610","phone":"603482394"}]

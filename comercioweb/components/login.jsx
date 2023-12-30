@@ -19,6 +19,11 @@ export default function Login() {
         }
     }
 
+    const redirectToAnotherPage = () => {
+        // Reemplaza '/otra-pagina' con la ruta de la página a la que quieres redirigir
+        router.push('/otra-pagina');
+      };
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const user = {
@@ -56,6 +61,7 @@ export default function Login() {
                         </div>
                         <button type="submit" className="w-full text-blue-600 bg-white hover:bg-blue-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center">Entrar</button>
                     </form>
+                    <button className="w-full text-blue-600 bg-white hover:bg-blue-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center" onClick={redirectToAnotherPage}>Seguir anonimo</button>
                 </div>
             </div>
 

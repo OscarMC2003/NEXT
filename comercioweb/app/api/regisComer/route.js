@@ -36,3 +36,25 @@ export async function DELETE(request) {
         console.log(e)
     }
 }
+
+/*export async function FIND(request) {
+    const data = await request.json()
+    try {
+         const users = JSON.parse(readFileSync("data/comercios.txt"))
+         //console.log(users)
+         const userFind = users.find(user => user.CIF == data.CIF)
+         //console.log(usersFIlter)
+        
+         if(!userFind)
+         {
+            return NextResponse.json({message: "No se encontró usuario"})
+         }
+
+         return NextResponse.json({userFind})
+
+     } catch(e){
+         console.log(e)
+     }
+ }*/
+
+ 
