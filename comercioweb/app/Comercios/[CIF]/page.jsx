@@ -1,31 +1,37 @@
 "use client"
+import React, { useEffect, useState } from 'react';
 
 export default function Page() {
+    const CIFComercio = localStorage.getItem("CIF");
+    const [comercio, setComercio] = useState(null);
 
-        const CIFComercio= localStorage.getItem('CIF')
-        alert(CIFComercio);
-        /*const fetchBuscarComercio = async (ComercioId) =>{
-            const rest = await fetch(`/api/buscarComercio/?CIF=${ComercioId}`);
-            const data = await rest.json();
-            if(rest.ok && data.comercio)
-            {
-                const comercio = data.comercio.find((c) => c.id === ComercioId);
-                console.log(comercio);
-                if(comercio)
-                {
-                    return comercio;
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await fetch("http://localhost:3000/api/regisComer");
+                const data = await res.json();
+                const comercios = data.users;
+                const comercioEncontrado = comercios.find((comercio) => comercio.CIF === CIFComercio);
+
+                if (comercioEncontrado) {
+                    setComercio(comercioEncontrado);
                 }
+            } catch (error) {
+                console.error("Error fetching data:", error);
             }
-        };*/
-    
-   
-    //const comercioEncontrado = fetchBuscarComercio(CIFComercio);
+        };
+
+        fetchData();
+    }, [CIFComercio]);
 
     return (
         <>
-        <h1>HOLA ME LA PELA POR DIOS FUNCIONA</h1>
-        
-        
+            {comercio ? (
+                <h1>algo: {comercio.CIF}</h1>
+                
+            ) : (
+                <p>Comercio no encontrado</p>
+            )}
         </>
-    )
+    );
 }
