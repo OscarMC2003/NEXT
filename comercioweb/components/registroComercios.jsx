@@ -22,17 +22,31 @@ export default function registroComercios() {
             address: address,
             name: name,
             phone: phone,
+            ciudad:"",
+            actividad:"",
+            titulo:"",
+            resumen:"",
+            textos:"",
+            fotos:"",
+            scoring:"",
+            puntuaciones:"",
+            resenas:"",
 
         }
-
-        fetch("/api/regisComer", {
+        if(email==="" || CIF==="" || address==="" || name==="" || phone==="")
+        {
+            alert("Debes rellenar los datos");
+        }else{
+            fetch("/api/regisComer", {
             method: "POST",
             headers: {
             //Authorization: `Bearer ${tokenJWT}`
             'Content-Type': 'application/json',
             },
             body: JSON.stringify(user)
-        })
+            })
+        }
+        
     }
 
 

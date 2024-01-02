@@ -18,14 +18,12 @@ async function getUsers() {
   }
 }
 
-const inicio = () => {
+const anonimo = () => {
   const [users, setUsers] = useState([]);
   const [searchCity, setSearchCity] = useState('');
   const [searchActivity, setSearchActivity] = useState('');
   const [searchName, setSearchName] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
-
-  const emailUser = localStorage.getItem("email");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,9 +50,6 @@ const inicio = () => {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        <h1 className="text-3xl font-bold mb-4 text-center">
-            Bienvenido: {emailUser}
-        </h1>
       <div className="mb-4">
         <label className="text-lg font-bold">Buscar por Ciudad:</label>
         <input
@@ -110,4 +105,4 @@ const inicio = () => {
   );
 };
 
-export default inicio;
+export default anonimo;

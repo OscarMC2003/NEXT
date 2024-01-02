@@ -11,6 +11,7 @@ export default function Login() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    localStorage.setItem('email', email);
 
     const redirigir = (code) => {
         console.log("Code", code)
@@ -21,7 +22,7 @@ export default function Login() {
 
     const redirectToAnotherPage = () => {
         // Reemplaza '/otra-pagina' con la ruta de la página a la que quieres redirigir
-        router.push('/otra-pagina');
+        router.push('/anonimo');
       };
 
     const handleSubmit = (e) => {
