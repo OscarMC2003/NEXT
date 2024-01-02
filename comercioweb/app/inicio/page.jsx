@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import Link from 'next/link'
 
 async function getUsers() {
   try {
@@ -54,6 +55,9 @@ const inicio = () => {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <h1 className="text-3xl font-bold mb-4 text-center">
             Bienvenido: {emailUser}
+            <div className="flex justify-between">
+                            <Link href="/modPerfil" className="align-start text-xs font-thin hover:underline">Modificar cuenta</Link>
+            </div>
         </h1>
       <div className="mb-4">
         <label className="text-lg font-bold">Buscar por Ciudad:</label>

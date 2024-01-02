@@ -7,6 +7,7 @@ export default function Page() {
     const router = useRouter();
     const CIFComercio = localStorage.getItem("CIF");
     const [comercio, setComercio] = useState(null);
+    const [users, setUsers] = useState(null);
 
     const [formData, setFormData] = useState({
         titulo: '',
@@ -65,8 +66,26 @@ export default function Page() {
                 console.error("Error fetching data:", error);
             }
         };
+        const fetchDataExtra = async () => {
+          try {
+              const res = await fetch("http://localhost:3000/api/users");
+              const data = await res.json();
+              const userInteresados = data.users;
+              const userInteresadoEncontrado = userInteresados.find((user) => user.interest === comercio.actividad);
+              const userInteresadoEncontradoLegal = userInteresadoEncontrado.find((user) => user.box === "1");
+
+              if (userInteresadoEncontradoLegal) {
+                  setusers(userInteresadoEncontradoLegal);
+              }
+          } catch (error) {
+              console.error("Error fetching data:", error);
+          }
+      };
+
+
 
         fetchData();
+        fetchDataExtra();
     }, [CIFComercio]);
 
 
@@ -185,6 +204,26 @@ export default function Page() {
                             Guardar Cambios
                         </button>
                     </form>
+
+
+                    {/* <ul>
+                      <p>Lista de usuarios interesados</p>
+                      {Array.isArray(users) && users.map((user) => (
+                        <li key={uuidv4()} className="bg-slate-400 mb-2 p-4 rounded-md text-back flex justify-between">
+                          <h5 className="font-bold">{user.email}</h5>
+                        </li>
+                      ))}
+                    </ul> */}
+                    <div className="flex flex-col items-center justify-center h-screen">
+                      <ul className="mb-8">
+                        <p className="text-xl font-semibold mb-2">Lista de usuarios interesados:</p>
+                        {Array.isArray(users) && users.map((user) => (
+                          <li key={uuidv4()} className="bg-gray-800 text-white mb-2 p-4 rounded-md flex justify-between items-center w-full">
+                            <h5 className="font-bold">{user.email}</h5>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                 </div>
                 
             ) : (

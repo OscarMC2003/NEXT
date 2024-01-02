@@ -15,6 +15,7 @@ export default function Registro() {
     const [year, setYear] = useState("")
     const [city, setCity] = useState("")
     const [interest, setInterest] = useState("")
+    const [box, setBox] = useState("0")
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,6 +26,7 @@ export default function Registro() {
             year: year,
             city: city,
             interest: interest,
+            box:box,
         }
 
 
@@ -69,7 +71,7 @@ export default function Registro() {
                             <input onChange={(e) => setInterest(e.target.value)} type="text" name="interest" id="interest" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Intereses" required="" />
                         </div>
                         <label className="text-white">Acepto recibir ofertas</label>
-                        <input type="checkbox" id="acepto_terminos" name="acepto_terminos" value=""></input>
+                        <input type="checkbox" id="box" name="box" value="1" onChange={(e) => setBox(e.target.value)}></input>
                         <div className="flex justify-between">
                             <Link href="/" className="align-start text-xs font-thin text-white hover:underline">Ya tengo una cuenta</Link>
                         </div>

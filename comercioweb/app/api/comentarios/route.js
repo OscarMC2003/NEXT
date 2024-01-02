@@ -1,12 +1,10 @@
-// pages/api/comentarios.js
-import { addComentario } from '../../utils/comercios';
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { comercioId, texto, usuario } = req.body;
 
     try {
-
+    const users = JSON.parse(readFileSync('data/comercios.txt'));
 
       const user = users.find((comercio) => comercio.CIF === params.CIF);
 
