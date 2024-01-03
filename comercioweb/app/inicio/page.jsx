@@ -4,6 +4,10 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Link from 'next/link'
 
+import { FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
+
+import Comentario from '@/components/comentario';
+
 async function getUsers() {
   try {
     const res = await fetch("http://localhost:3000/api/regisComer");
@@ -28,15 +32,22 @@ const inicio = () => {
 
   const emailUser = localStorage.getItem("email");
 
+  const [nuevoValorScoring, setNuevoValorScoring] = useState(0);
+  const [nuevoValorPuntuaciones, setNuevoValorPuntuaciones] = useState(0);
+
   useEffect(() => {
     const fetchData = async () => {
       const usersData = await getUsers();
       setUsers(usersData);
       setFilteredUsers(usersData); // Inicialmente, la lista filtrada es la misma que la lista completa
+      setNuevoValorPuntuaciones(usersData.puntuaciones);
+      setNuevoValorScoring(usersData.scoring);
     };
 
     fetchData();
   }, []);
+
+  
 
   useEffect(() => {
     const filterUsers = () => {
@@ -50,6 +61,72 @@ const inicio = () => {
 
     filterUsers();
   }, [searchCity, searchActivity, searchName, users]);
+
+  const handleLike = (user) => {
+    //alert("like");
+    setNuevoValorScoring(Number(user.scoring)+1);
+    console.log(nuevoValorScoring);
+    setNuevoValorPuntuaciones(Number(user.puntuaciones)+1)
+    console.log(nuevoValorPuntuaciones);
+
+    setFormData({
+      ...formData,
+      CIF: user.CIF,
+      scoring:nuevoValorScoring,
+      puntuaciones:nuevoValorPuntuaciones
+    });
+
+    handleModificarInformacion();
+  };
+
+  const handleDislike = (user) => {
+   //alert("dislike");
+   setNuevoValorScoring(Number(user.scoring)-1);
+   console.log(nuevoValorScoring);
+   setNuevoValorPuntuaciones(Number(user.puntuaciones)+1)
+   console.log(nuevoValorPuntuaciones);
+
+   setFormData({
+     ...formData,
+     CIF: user.CIF,
+     scoring:nuevoValorScoring,
+    puntuaciones:nuevoValorPuntuaciones
+   });
+
+
+    handleModificarInformacion();
+  };
+
+
+  const [formData, setFormData] = useState({
+    scoring:nuevoValorScoring,
+    puntuaciones: nuevoValorPuntuaciones,
+    CIF: ''
+  });
+
+
+  const handleModificarInformacion = async () => {
+    console.log(formData.scoring || null);
+    console.log(formData.puntuaciones || null);
+    console.log(formData.CIF || null);
+    try {
+      const response = await fetch('/api/modComercio', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.status === 200) {
+        console.log("cambio de info correcta")
+      } else {
+        console.error('Error al actualizar la información.');
+      }
+    } catch (error) {
+      console.error("Error en la solicitud de actualización", error);
+    }
+  };
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -104,10 +181,21 @@ const inicio = () => {
             <h5 className="text-lg font-bold mt-4 mb-2">Teléfono: {user.phone}</h5>
             <p className="text-gray-600">{user.resumen}</p>
             <img className="w-full h-32 object-cover rounded mt-4" src={`/images/${user.fotos}.jpg`} alt="NO IMAGENES INTRODUCIDAS" />
-            <h5 className="text-lg font-bold mt-4 mb-2">Puntuacion: {user.scoring}</h5>
-            <p className="text-gray-600">{user.resenas}</p>
+            <h5 className="text-lg font-bold mt-4 mb-2">Scoring: {user.scoring}</h5>
+            <p className="text-gray-600">Numero de puntuaciones: {user.puntuaciones}</p>
+              <div>
+                <button className="mr-5" onClick={() => handleLike(user)}>
+                  <FaThumbsUp />
+                </button>
+                <button onClick={() => handleDislike(user)}>
+                  <FaThumbsDown />
+                </button>
+              </div>
+              <p className="text-gray-600">Comentarios del comercio: {user.resenas}</p>
+              < Comentario usuario={user} />
             </div>
           </li>
+          
         ))}
       </ul>
     </main>

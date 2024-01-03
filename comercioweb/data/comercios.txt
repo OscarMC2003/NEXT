@@ -11,8 +11,40 @@
     "resumen": "aaaa",
     "textos": "hola muy buenas",
     "fotos": "9",
-    "scoring": "",
-    "puntuaciones": "",
+    "scoring": 2,
+    "puntuaciones": 4,
+    "resenas": "\nhola que tal\nparece quer al fin funciono"
+  },
+  {
+    "email": "preubas@pruebas.com",
+    "CIF": "888",
+    "address": "costa brava",
+    "name": "italica",
+    "phone": "6546554",
+    "ciudad": "Andorra",
+    "actividad": "CompraVenta de italianos",
+    "titulo": "La mejor comida italiana",
+    "resumen": "pues necesito meter mas",
+    "textos": "pues ns cualquier cossa random",
+    "fotos": "4",
+    "scoring": 2,
+    "puntuaciones": 2,
+    "resenas": "\npreuba2comentarios"
+  },
+  {
+    "email": "sdfsd@asddas.com",
+    "CIF": "63",
+    "address": "asddrfvdsf",
+    "name": "LG",
+    "phone": "54654",
+    "ciudad": "asdcasdca",
+    "actividad": "ascascas",
+    "titulo": "sadcasdc",
+    "resumen": "asdcasdc",
+    "textos": "ascascas",
+    "fotos": "3",
+    "scoring": -1,
+    "puntuaciones": 1,
     "resenas": ""
   }
 ]

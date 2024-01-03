@@ -28,8 +28,8 @@ export default function registroComercios() {
             resumen:"",
             textos:"",
             fotos:"",
-            scoring:"",
-            puntuaciones:"",
+            scoring:"0",
+            puntuaciones:"0",
             resenas:"",
 
         }

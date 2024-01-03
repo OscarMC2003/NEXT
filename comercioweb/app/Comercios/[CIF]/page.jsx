@@ -2,6 +2,27 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'
 
+
+const fetchDataExtra = async () => {
+  //alert("Entro en la funcion")
+  try {
+      const res = await fetch("http://localhost:3000/api/users");
+      const data = await res.json();
+      const userInteresados = data.users;
+      console.log(userInteresados);
+      console.log(comercio.actividad);
+      console.log(userInteresados.interest)
+      const userInteresadoEncontrado = userInteresados.find((user) => user.interest === comercio.actividad);
+      const userInteresadoEncontradoLegal = userInteresadoEncontrado.find((user) => user.box === "1");
+
+      if (userInteresadoEncontradoLegal) {
+          setUsers(userInteresadoEncontradoLegal);
+      }
+  } catch (error) {
+      console.error("Error fetching data:", error);
+  }
+};
+
 export default function Page() {
 
     const router = useRouter();
@@ -66,26 +87,8 @@ export default function Page() {
                 console.error("Error fetching data:", error);
             }
         };
-        const fetchDataExtra = async () => {
-          try {
-              const res = await fetch("http://localhost:3000/api/users");
-              const data = await res.json();
-              const userInteresados = data.users;
-              const userInteresadoEncontrado = userInteresados.find((user) => user.interest === comercio.actividad);
-              const userInteresadoEncontradoLegal = userInteresadoEncontrado.find((user) => user.box === "1");
-
-              if (userInteresadoEncontradoLegal) {
-                  setusers(userInteresadoEncontradoLegal);
-              }
-          } catch (error) {
-              console.error("Error fetching data:", error);
-          }
-      };
-
-
 
         fetchData();
-        fetchDataExtra();
     }, [CIFComercio]);
 
 
@@ -214,6 +217,11 @@ export default function Page() {
                         </li>
                       ))}
                     </ul> */}
+                    <button
+                    onClick={() => fetchDataExtra()}
+                    className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Obtener usuarios interesados
+                    </button>
                     <div className="flex flex-col items-center justify-center h-screen">
                       <ul className="mb-8">
                         <p className="text-xl font-semibold mb-2">Lista de usuarios interesados:</p>

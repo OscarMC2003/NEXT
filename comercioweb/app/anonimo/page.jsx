@@ -96,7 +96,7 @@ const anonimo = () => {
             <p className="text-gray-600">{user.resumen}</p>
             <img className="w-full h-32 object-cover rounded mt-4" src={`/images/${user.fotos}.jpg`} alt="NO IMAGENES INTRODUCIDAS" />
             <h5 className="text-lg font-bold mt-4 mb-2">Puntuacion: {user.scoring}</h5>
-            <p className="text-gray-600">{user.resenas}</p>
+            <p className="text-gray-600">Comentarios del comercio:{user.resenas}</p>
             </div>
           </li>
         ))}
