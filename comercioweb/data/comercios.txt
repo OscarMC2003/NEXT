@@ -11,9 +11,9 @@
     "resumen": "aaaa",
     "textos": "hola muy buenas",
     "fotos": "9",
-    "scoring": 2,
-    "puntuaciones": 4,
-    "resenas": "\nhola que tal\nparece quer al fin funciono"
+    "scoring": 3,
+    "puntuaciones": 5,
+    "resenas": "\nhola que tal\nparece quer al fin funciono||manolo el del barrio"
   },
   {
     "email": "preubas@pruebas.com",
@@ -45,6 +45,6 @@
     "fotos": "3",
     "scoring": -1,
     "puntuaciones": 1,
-    "resenas": ""
+    "resenas": "||alba la mas bonita"
   }
 ]

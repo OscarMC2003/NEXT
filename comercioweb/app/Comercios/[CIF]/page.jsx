@@ -3,26 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'
 
 
-const fetchDataExtra = async () => {
-  //alert("Entro en la funcion")
-  try {
-      const res = await fetch("http://localhost:3000/api/users");
-      const data = await res.json();
-      const userInteresados = data.users;
-      console.log(userInteresados);
-      console.log(comercio.actividad);
-      console.log(userInteresados.interest)
-      const userInteresadoEncontrado = userInteresados.find((user) => user.interest === comercio.actividad);
-      const userInteresadoEncontradoLegal = userInteresadoEncontrado.find((user) => user.box === "1");
-
-      if (userInteresadoEncontradoLegal) {
-          setUsers(userInteresadoEncontradoLegal);
-      }
-  } catch (error) {
-      console.error("Error fetching data:", error);
-  }
-};
-
 export default function Page() {
 
     const router = useRouter();
@@ -108,6 +88,34 @@ export default function Page() {
         }
       };
 
+      useEffect(() => {
+        const fetchDataExtra = async (comercio) => {
+          //alert("Entro en la funcion")
+          try {
+              const res = await fetch("http://localhost:3000/api/users");
+              const data = await res.json();
+              const userInteresados = data.users;
+              const usuariosFiltrados = userInteresados.filter(user => (
+                user.box === "1"
+            ));
+              console.log(1);
+              console.log(usuariosFiltrados);
+              const usuariosFiltradosFinal = usuariosFiltrados.filter(user => (
+                user.interest === comercio.actividad));
+              console.log(2);
+              console.log(usuariosFiltradosFinal);
+
+            if (usuariosFiltradosFinal.length > 0) {
+              setUsers(usuariosFiltradosFinal);
+            } 
+            //userfilter();
+          } catch (error) {
+              console.error("Error fetching data:", error);
+          }
+        };
+        fetchDataExtra(comercio);
+      }, [comercio]);  
+
     return (
         <>
             {comercio ? (
@@ -125,6 +133,9 @@ export default function Page() {
                             <p className="text-gray-600">Actividades: {comercio.actividad}</p>
                             <p className="text-gray-600">Texto: {comercio.textos}</p>
                             <img src={`/images/${comercio.fotos}.jpg`} alt="NO IMAGENES INTRODUCIDAS" />
+                            <p className="text-gray-600">Puntuaciones: {comercio.puntuaciones}</p>
+                            <p className="text-gray-600">Scoring: {comercio.scoring}</p>
+                            <p className="text-gray-600">Reseñas: {comercio.resenas}</p>
                             <button
                             onClick={() => handleDeleteUser(comercio)}
                             className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
@@ -207,31 +218,19 @@ export default function Page() {
                             Guardar Cambios
                         </button>
                     </form>
-
-
-                    {/* <ul>
-                      <p>Lista de usuarios interesados</p>
-                      {Array.isArray(users) && users.map((user) => (
-                        <li key={uuidv4()} className="bg-slate-400 mb-2 p-4 rounded-md text-back flex justify-between">
-                          <h5 className="font-bold">{user.email}</h5>
-                        </li>
-                      ))}
-                    </ul> */}
-                    <button
-                    onClick={() => fetchDataExtra()}
-                    className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Obtener usuarios interesados
-                    </button>
-                    <div className="flex flex-col items-center justify-center h-screen">
-                      <ul className="mb-8">
-                        <p className="text-xl font-semibold mb-2">Lista de usuarios interesados:</p>
-                        {Array.isArray(users) && users.map((user) => (
-                          <li key={uuidv4()} className="bg-gray-800 text-white mb-2 p-4 rounded-md flex justify-between items-center w-full">
-                            <h5 className="font-bold">{user.email}</h5>
-                          </li>
+                    {users && users.length > 0 && (
+                      <div className="mt-5 max-w-md mx-auto bg-white shadow-md rounded-md overflow-hidden">
+                        <h2 className="text-2xl font-semibold mb-4">Usuarios Interesados:</h2>
+                        {users.map((user) => (
+                          <div key={user.id} className="mb-2">
+                            <p className="text-gray-600">Nombre: {user.name}</p>
+                            <p className="text-gray-600">Interés: {user.interest}</p>
+                            <p className="text-gray-600">Email: {user.email}</p>
+                            <p className="text-gray-600">Ciudad: {user.city}</p>
+                          </div>
                         ))}
-                      </ul>
-                    </div>
+                      </div>
+                    )}
                 </div>
                 
             ) : (

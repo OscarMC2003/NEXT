@@ -88,7 +88,7 @@ const Comentario = ({ usuario }) => {
         ...formData,
         [name]: formData[name] + '||' + value,
       });
-    }, 1000); // Esperar 500 milisegundos (ajusta este valor según tus necesidades)
+    }, 1000); // Esperar 1000 milisegundos (ajusta este valor según tus necesidades)
   };
 
   const handleModificarInformacion = async (e) => {

@@ -15,7 +15,7 @@
     "name": "pepe",
     "year": "98",
     "city": "Cordoba",
-    "interest": "ningunoi",
+    "interest": "aprobar",
     "box": "1"
   },
   {
